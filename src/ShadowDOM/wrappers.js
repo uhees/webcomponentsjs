@@ -218,6 +218,10 @@ window.ShadowDOMPolyfill = {};
         source.__lookupGetter__(name);
       }
       var descriptor = getDescriptor(source, name);
+      
+      // Mobile Safari 10 has "showModalDialog" in the names, but returns undefined as descriptor
+      if (descriptor === undefined) continue;
+      
       var getter, setter;
       if(typeof descriptor.value === 'function') {
           if (allowMethod) {
